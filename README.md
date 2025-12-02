@@ -1,2 +1,2 @@
 # customer-artifact-guide
-Support customer facing artifacts
+This repository is support page of VirtueAI customers
