@@ -2,35 +2,33 @@
 
 
 
+## Install GCP cli
+- Gcloud CLI tool is required for manual setup
+https://docs.cloud.google.com/sdk/docs/install
+
+
+
 ## Docker login using Service Account Key
 
 ```
-$ cat {{customer_sa_key_file_provided_by_virtueai}} | docker login -u _json_key --password-stdin https://us-docker.pkg.dev
+$ gcloud auth activate-service-account --key-file=service-account.json
+$ cat service-account.json | docker login -u _json_key --password-stdin https://us-docker.pkg.dev
 
 ```
-
-
-
 
 
 
 ## Setup using script
 
-### Install GCP cli
-- Gcloud CLI tool is required for manual setup
-https://docs.cloud.google.com/sdk/docs/install
-
-
 ### Run script
 ```
-$ ./setup-customer-gcp-artifact.sh {{client_email_within_sa_key_file}} {{customer_sa_key_file_provided_by_virtueai}}
+$ ./setup-customer-gcp-artifact.sh {{customer_sa_key_file_provided_by_virtueai}}
 ```
 
 ```
 ## example
-$ ./setup-customer-gcp-artifact.sh customer-name1-12345678@customer-docker-virtueai.iam.gserviceaccount.com ./customer-key.json
+$ ./setup-customer-gcp-artifact.sh ./service-account.json
 ```
-
 
 
 ## Setup manually
@@ -39,11 +37,10 @@ $ ./setup-customer-gcp-artifact.sh customer-name1-12345678@customer-docker-virtu
 
 ### GCP Login using customer key
 
-- Store customer key file provided by VirtueAI (e.g. `customer-key.json`)
+- Store customer key file provided by VirtueAI (e.g. `service-account.json`)
 
 ```
-$ export GCP_VIRTUEAI_CUSTOMER_SA={{client_email_within_sa_key_file}}
-$ gcloud auth activate-service-account $GCP_VIRTUEAI_CUSTOMER_SA --key-file=./customer-key.json
+$ gcloud auth activate-service-account --key-file=./service-account.json
 Activated service account credentials for: [{{client_email_within_sa_key_file}}]
 
 ```
