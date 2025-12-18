@@ -9,12 +9,29 @@ https://docs.cloud.google.com/sdk/docs/install
 
 
 ## Docker login using Service Account Key
+```
+$ docker login -u _json_key --password-stdin https://us-docker.pkg.dev < service-account.json
+
+# check docker config.json
+$ cat ~/.docker/config.json
+
+# test docker pull
+docker pull us-docker.pkg.dev/{{your_docker_registry_uri_path}}
+
+```
+
+
+## Docker login using Service Account Key 
 
 ```
 $ gcloud auth activate-service-account --key-file=service-account.json
 $ cat service-account.json | docker login -u _json_key --password-stdin https://us-docker.pkg.dev
 
+# test docker pull
+docker pull us-docker.pkg.dev/{{your_docker_registry_uri_path}}
 ```
+
+
 
 
 
